@@ -18,6 +18,9 @@ customer1.save
 ticket1 = Ticket.new('film_id' => film1.id, 'customer_id' => customer1.id)
 ticket1.save
 
+film1.price = '10'
+film1.update
+
 p Ticket.all()
 p Film.all()
 p Customer.all()
