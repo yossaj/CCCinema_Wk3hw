@@ -54,4 +54,5 @@ film1.update
 # p Film.all()
 # p Customer.all()
 
-p customer1.booked
+customer1.booked
+p film1.all_customers
