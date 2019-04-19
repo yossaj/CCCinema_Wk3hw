@@ -3,7 +3,7 @@ require_relative('tickets')
 require_relative('films')
 
 
-class Customers
+class Customer
   attr_reader :name, :id
   attr_accessor :funds
 
@@ -19,6 +19,12 @@ class Customers
     result = SqlRunner.run(sql, values).first
     @id = result['id'].to_i
   end
+
+  def self.delete_all
+    sql = "DELETE FROM customers"
+    SqlRunner.run(sql)
+  end
+
 
 
 

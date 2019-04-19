@@ -3,7 +3,7 @@ require_relative('customers')
 require_relative('films')
 
 
-class Tickets
+class Ticket
 
   attr_reader :film_id, :customer_id, :id
 
@@ -14,13 +14,19 @@ class Tickets
   end
 
   def save()
-    sql = "INSERT INTO tickets(film_id, ticket_id) VALUES ($1, $2) RETURNING id"
+    sql = "INSERT INTO tickets(film_id, customer_id) VALUES ($1, $2) RETURNING id"
     values = [@film_id,@customer_id]
     result = SqlRunner.run(sql, values).first
     @id = result['id'].to_i
   end
 
-  
+  def self.delete_all
+    sql = "DELETE FROM tickets"
+    SqlRunner.run(sql)
+  end
+
+
+
 
 
 end
