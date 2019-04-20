@@ -18,6 +18,9 @@ film2.save
 film3 = Film.new('title'=>'Silence', 'price' => '8')
 film3.save
 
+film4 = Film.new('title'=>'Toy Story', 'price' => '10')
+film3.save
+
 
 
 customer1 = Customer.new('name'=> 'Bill', 'funds' => '500')
@@ -55,4 +58,8 @@ film1.update
 # p Customer.all()
 
 customer1.booked
-p film1.all_customers
+film1.all_customers
+
+p customer1.reduce_funds
+p customer1.funds
+customer1

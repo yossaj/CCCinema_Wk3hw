@@ -21,7 +21,7 @@ class Customer
   end
 
   def booked()
-    sql = "SELECT films.title
+    sql = "SELECT films.*
           FROM films INNER JOIN tickets
           ON tickets.film_id = films.id
           WHERE customer_id = $1"
@@ -42,6 +42,15 @@ class Customer
     customers = results.map{|customer| Customer.new(customer)}
     return customers
   end
+
+  def reduce_funds
+    movies = self.booked
+    prices = movies.map{|movie| movie.price}
+    total_price = prices.sum
+    @funds -= total_price
+  end
+
+
 
 
 
