@@ -36,6 +36,15 @@ class Film
     SqlRunner.run(sql, values)
   end
 
+  def show_available_tickets
+      sql = "SELECT films.title, screening_times.screening_time, screening_times.available_tickets FROM films
+            INNER JOIN screening_times
+            ON films.id = screening_times.film_id WHERE film_id = $1;"
+      values = [@id]
+      results = SqlRunner.run(sql,values)
+      table = results.map{|times| times}
+  end
+
 def self.delete_all
   sql = "DELETE FROM films;"
   SqlRunner.run(sql)

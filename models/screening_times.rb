@@ -41,13 +41,16 @@ class ScreeningTime
   #     self.update
   # end
   def self.show_all_available_tickets
-      sql = "SELECT films.title, screening_times.screening_time, screening_times.available_tickets FROM films
-  INNER JOIN screening_times
-  ON films.id = screening_times.film_id;"
+      sql = "SELECT films.title, screening_times.screening_time, screening_times.available_tickets
+            FROM films
+            INNER JOIN screening_times
+            ON films.id = screening_times.film_id;"
       results = SqlRunner.run(sql)
       table = results.map{|times| times}
   end
   #
+
+
   def self.delete_all
     sql = "DELETE FROM screening_times"
     SqlRunner.run(sql)

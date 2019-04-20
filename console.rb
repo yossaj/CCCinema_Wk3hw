@@ -99,4 +99,5 @@ customer2.buy_tickets_for(screening_time1)
 customer4.buy_tickets_for(screening_time1)
 customer5.buy_tickets_for(screening_time1)
 
-p ScreeningTime.show_available_tickets
+ScreeningTime.show_all_available_tickets
+p film4.show_available_tickets
