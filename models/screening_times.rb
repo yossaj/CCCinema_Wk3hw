@@ -22,18 +22,38 @@ class ScreeningTime
     result = SqlRunner.run(sql, values).first
     @id = result['id'].to_i
   end
+
+  def update
+    sql = "UPDATE screening_times SET (screening_time, available_tickets, film_id) = ($1,$2,$3) WHERE id = $4;"
+    values = [@screening_time,@available_tickets,@film_id, @id]
+    SqlRunner.run(sql, values)
+  end
+
+  def reduce_available_tickets
+      sql = "SELECT tickets.*
+            FROM tickets INNER JOIN screening_times
+            ON tickets.film_id = screening_times.film_id
+            WHERE screening_times.film_id = $1;
+         "
+      values = [@film_id]
+      result = SqlRunner.run(sql,values).count
+      @available_tickets -= result
+      self.update
+  end
   #
-  # def self.delete_all
-  #   sql = "DELETE FROM tickets"
-  #   SqlRunner.run(sql)
-  # end
-  #
-  # def self.all
-  #   sql = "SELECT * FROM tickets"
-  #   results = SqlRunner.run(sql)
-  #   tickets = results.map{|ticket| Ticket.new(ticket)}
-  #   return tickets
-  # end
+  def self.delete_all
+    sql = "DELETE FROM screening_times"
+    SqlRunner.run(sql)
+  end
+
+  def self.all
+    sql = "SELECT * FROM screening_times"
+    results = SqlRunner.run(sql)
+    screening_times = results.map{|screening_time| ScreeningTime.new(screening_time)}
+    return screening_times
+  end
+
+
 
 
 

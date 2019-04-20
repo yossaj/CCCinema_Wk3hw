@@ -5,6 +5,7 @@ require_relative('./models/tickets.rb')
 require_relative('./models/screening_times.rb')
 
 Ticket.delete_all
+ScreeningTime.delete_all
 Film.delete_all
 Customer.delete_all
 
@@ -66,10 +67,13 @@ ticket3.save
 ticket4 = Ticket.new('film_id'=>film4.id, 'customer_id' => customer1.id, 'screening_time_id' => screening_time4.id)
 ticket4.save
 
+ticket5 = Ticket.new('film_id'=>film1.id, 'customer_id' => customer3.id, 'screening_time_id' => screening_time1.id)
+ticket5.save
+
 film1.price = '10'
 film1.update
 
-p screening_time1.id
+# screening_time1.id
 # p Ticket.all()
 # p Film.all()
 # p Customer.all()
@@ -77,10 +81,12 @@ p screening_time1.id
 customer1.booked
 film1.all_customers
 
- customer1.buy_tickets
-
+customer1.buy_tickets
 customer2.buy_tickets
 customer3.buy_tickets
 customer4.buy_tickets
 customer5.buy_tickets
 # customer1.update()
+# ScreeningTime.all()
+
+p screening_time1.reduce_available_tickets
