@@ -53,6 +53,9 @@ screening_time3.save
 screening_time4 = ScreeningTime.new('screening_time'=> '20:20', 'available_tickets' => '60', 'film_id' => film4.id)
 screening_time4.save
 
+screening_time5 = ScreeningTime.new('screening_time'=>'17:50','available_tickets'=>'0','film_id'=>film4.id)
+screening_time5.save()
+
 
 
 ticket1 = Ticket.new('film_id' => film1.id, 'customer_id' => customer1.id,'screening_time_id' => screening_time1.id )
@@ -89,4 +92,11 @@ customer5.buy_tickets
 # customer1.update()
 # ScreeningTime.all()
 
-p screening_time1.reduce_available_tickets
+# screening_time1.reduce_available_tickets
+
+customer1.buy_tickets_for(screening_time1)
+customer2.buy_tickets_for(screening_time1)
+customer4.buy_tickets_for(screening_time1)
+customer5.buy_tickets_for(screening_time1)
+
+p ScreeningTime.show_available_tickets

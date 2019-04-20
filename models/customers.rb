@@ -60,7 +60,14 @@ class Customer
     self.update
   end
 
-  
+  def buy_tickets_for(screening)
+    return 'Sold Out' if screening.available_tickets <= 0
+    buy_tickets
+    screening.available_tickets -= 1
+    screening.update
+  end
+
+
 
 
 
