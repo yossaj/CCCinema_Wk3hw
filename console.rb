@@ -19,7 +19,7 @@ film3 = Film.new('title'=>'Silence', 'price' => '8')
 film3.save
 
 film4 = Film.new('title'=>'Toy Story', 'price' => '10')
-film3.save
+film4.save
 
 
 
@@ -60,6 +60,6 @@ film1.update
 customer1.booked
 film1.all_customers
 
-p customer1.reduce_funds
-p customer1.funds
-customer1
+ customer1.buy_tickets
+ customer1.funds
+# customer1.update()

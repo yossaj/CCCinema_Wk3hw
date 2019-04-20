@@ -20,6 +20,13 @@ class Customer
     @id = result['id'].to_i
   end
 
+  def update
+    sql = "UPDATE customers SET (name, funds) = ($1,$2) WHERE id = $3;"
+    values = [@name, @funds, @id]
+    SqlRunner.run(sql, values)
+  end
+
+
   def booked()
     sql = "SELECT films.*
           FROM films INNER JOIN tickets
@@ -30,6 +37,8 @@ class Customer
     movies = results.map{|film| Film.new(film)}
     return movies
   end
+
+
 
   def self.delete_all
     sql = "DELETE FROM customers"
@@ -43,11 +52,12 @@ class Customer
     return customers
   end
 
-  def reduce_funds
+  def buy_tickets
     movies = self.booked
     prices = movies.map{|movie| movie.price}
     total_price = prices.sum
     @funds -= total_price
+    self.update
   end
 
 
