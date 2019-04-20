@@ -5,7 +5,7 @@ require_relative('films')
 
 class Ticket
 
-  attr_reader :film_id, :customer_id, :id
+  attr_reader :film_id, :customer_id, :screening_time_id, :id
 
   def initialize(options)
     @film_id = options['film_id'].to_i
@@ -15,8 +15,8 @@ class Ticket
   end
 
   def save()
-    sql = "INSERT INTO tickets(film_id, customer_id) VALUES ($1, $2) RETURNING id"
-    values = [@film_id,@customer_id]
+    sql = "INSERT INTO tickets(film_id, customer_id, screening_time_id) VALUES ($1, $2, $3) RETURNING id"
+    values = [@film_id,@customer_id, @screening_time_id]
     result = SqlRunner.run(sql, values).first
     @id = result['id'].to_i
   end

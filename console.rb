@@ -69,6 +69,7 @@ ticket4.save
 film1.price = '10'
 film1.update
 
+p screening_time1.id
 # p Ticket.all()
 # p Film.all()
 # p Customer.all()
