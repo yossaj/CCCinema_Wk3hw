@@ -56,6 +56,37 @@ class Ticket
     return "The best selling movie this month is #{top_movie["title"]}.There are #{top_movie["available_tickets"]} tickets left for the #{top_movie["screening_time"]} screening!"
   end
 
+  def self.most_popular_screening(film)
+    sql = "SELECT * FROM tickets WHERE film_id = $1"
+    values = [film.id]
+    results = SqlRunner.run(sql, values)
+
+    tickets = []
+    tickets = results.map{|ticket| Ticket.new(ticket)}
+
+
+    screenings = tickets.map{|ticket|ticket.screening_time_id.to_s}
+    screening_tally = Hash.new(0)
+    screenings.each{|screening| screening_tally[screening] += 1}
+    screening_tally
+    best_sell = screening_tally.max_by{|k,v| v}
+    screening_time_id = best_sell[0]
+    tickets_sold = best_sell[1]
+
+
+    sql2 = "SELECT films.*, screening_times.* FROM screening_times
+          INNER JOIN films
+          ON films.id = screening_times.film_id
+          WHERE screening_times.id = $1"
+    values2 = [screening_time_id]
+    # binding.pry
+    results = SqlRunner.run(sql2, values2)
+    show = results.map{|result| result}.first
+    return "The most popular showing of this film,#{show['title']}, is the #{show['screening_time']} screening. #{tickets_sold} tickets have been sold. There are #{show['available_tickets']} tickets remaining."
+
+  end
+
+
 
   # chickens_tally = chickens_with_dupes.reduce({}) do |tally, chicken|
   #   if tally.include?(chicken)

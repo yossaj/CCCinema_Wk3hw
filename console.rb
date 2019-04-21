@@ -53,7 +53,7 @@ screening_time3.save
 screening_time4 = ScreeningTime.new('screening_time'=> '20:20', 'available_tickets' => '60', 'film_id' => film4.id)
 screening_time4.save
 
-screening_time5 = ScreeningTime.new('screening_time'=>'17:50','available_tickets'=>'0','film_id'=>film4.id)
+screening_time5 = ScreeningTime.new('screening_time'=>'17:50','available_tickets'=>'10','film_id'=>film4.id)
 screening_time5.save()
 
 
@@ -67,11 +67,26 @@ ticket2.save
 ticket3 = Ticket.new('film_id' => film3.id, 'customer_id' => customer2.id, 'screening_time_id' => screening_time3.id)
 ticket3.save
 
-ticket4 = Ticket.new('film_id'=>film4.id, 'customer_id' => customer1.id, 'screening_time_id' => screening_time4.id)
-ticket4.save
-
 ticket5 = Ticket.new('film_id'=>film1.id, 'customer_id' => customer3.id, 'screening_time_id' => screening_time1.id)
 ticket5.save
+
+
+ticket4 = Ticket.new('film_id'=>film4.id, 'customer_id' => customer1.id, 'screening_time_id' => screening_time4.id)
+ticket4.save
+ticket6 = Ticket.new('film_id'=>film4.id, 'customer_id' => customer4.id, 'screening_time_id' => screening_time5.id)
+ticket6.save()
+ticket7 = Ticket.new('film_id'=>film4.id, 'customer_id' => customer3.id, 'screening_time_id' => screening_time5.id)
+ticket7.save()
+ticket8 = Ticket.new('film_id'=>film4.id, 'customer_id' => customer2.id, 'screening_time_id' => screening_time5.id)
+ticket8.save()
+ticket8 = Ticket.new('film_id'=>film4.id, 'customer_id' => customer5.id, 'screening_time_id' => screening_time4.id)
+ticket8.save()
+
+
+
+
+
+
 
 film1.price = '10'
 film1.update
@@ -101,4 +116,6 @@ customer5.buy_tickets_for(screening_time1)
 
 # ScreeningTime.show_all_available_tickets
 # film4.show_available_tickets
-p Ticket.show_best_seller
+# Ticket.show_best_seller
+
+p Ticket.most_popular_screening(film1)
