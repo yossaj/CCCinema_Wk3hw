@@ -23,6 +23,15 @@ film3.save
 film4 = Film.new('title'=>'Toy Story', 'price' => '10')
 film4.save
 
+film5 = Film.new('title'=>'Killing Fields', 'price' => '15')
+film5.save
+film6 = Film.new('title'=>'Noah', 'price' => '9')
+film6.save
+film7 = Film.new('title'=>'Iron Man', 'price' => '11')
+film7.save
+film8 = Film.new('title'=>'The Last Castle', 'price' => '11')
+film8.save
+
 
 
 customer1 = Customer.new('name'=> 'Bill', 'funds' => '500')
@@ -118,4 +127,8 @@ customer5.buy_tickets_for(screening_time1)
 # film4.show_available_tickets
 # Ticket.show_best_seller
 
-p Ticket.most_popular_screening(film1)
+Ticket.most_popular_screening(film1)
+
+p Film.all
+puts
+p Film.expensive_movies

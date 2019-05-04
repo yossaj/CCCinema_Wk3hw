@@ -38,20 +38,6 @@ class Customer
     return movies
   end
 
-
-
-  def self.delete_all
-    sql = "DELETE FROM customers"
-    SqlRunner.run(sql)
-  end
-
-  def self.all
-    sql = "SELECT * FROM customers"
-    results = SqlRunner.run(sql)
-    customers = results.map{|customer| Customer.new(customer)}
-    return customers
-  end
-
   def buy_tickets
     movies = self.booked
     prices = movies.map{|movie| movie.price}
@@ -66,6 +52,20 @@ class Customer
     screening.available_tickets -= 1
     screening.update
   end
+
+  def self.delete_all
+    sql = "DELETE FROM customers"
+    SqlRunner.run(sql)
+  end
+
+  def self.all
+    sql = "SELECT * FROM customers"
+    results = SqlRunner.run(sql)
+    customers = results.map{|customer| Customer.new(customer)}
+    return customers
+  end
+
+
 
 
 

@@ -59,4 +59,17 @@ end
 
 
 
+def self.expensive_movies
+  premium = Array.new
+  movies = self.all
+  for movie in movies
+    if movie.price > 8
+      premium.push(movie)
+    end
+  end
+  return premium
+end
+
+
+
 end
